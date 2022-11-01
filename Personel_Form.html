@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Personel Bilgileri</title>
+    <style>
+      #container {
+        margin: 0px auto;
+        width: 800px;
+        text-align: center;
+      }
+      #employee-table {
+        width: 800px;
+        border: 1px solid rgb(202, 80, 19);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h2>Personel Form</h2>
+      <button onclick="addNewRow()">Ekle</button>
+      <button onclick="deleteRow()">Sil</button>
+      <br />
+      <br />
+      <table id="employee-table">
+        <tr>
+          <th>İsim</th>
+          <th>Soyisim</th>
+          <th>Telefon</th>
+          <th></th>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+  <script>
+    /* Yeni satır ekleme fonksiyonu */
+    function addNewRow() {
+      var table = document.getElementById("employee-table");
+      var rowCount = table.rows.length;
+      var cellCount = table.rows[0].cells.length;
+      var row = table.insertRow(rowCount);
+
+      for (var i = 0; i < cellCount; i++) {
+        var cell = row.insertCell(i);
+
+        if (i < cellCount - 1) {
+          cell.innerHTML = '<input type="text" />';
+        } else {
+          cell.innerHTML =
+            '<input type="button" value="Satırı Sil" onclick="deleteRow(this)" />';
+        }
+      }
+    }
+
+    /* Satır silme fonksiyonu */
+    function deleteRow(ele) {
+      var table = document.getElementById("employee-table");
+      var rowCount = table.rows.length;
+      if (rowCount <= 1) {
+        alert("Silinecek satır kalmadı!"); // Silinecek satır kalmadığında alert
+        return;
+      }
+      if (ele) {
+        // Belirli bir satırı silme
+        ele.parentNode.parentNode.remove();
+      } else {
+        // Son satırı silme
+        table.deleteRow(rowCount - 1);
+      }
+    }
+  </script>
+</html>
